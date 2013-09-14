@@ -26,11 +26,25 @@ def start_master(redis_server, repo):
         run('git clone https://github.com/karenc/test-pull-requests')
     with cd('test-pull-requests'):
         _update_repo()
-        run('virtualenv .')
+        if not fabric.contrib.files.exists('bin'):
+            run('virtualenv .')
         run('./bin/python setup.py install')
         while True:
             run('./bin/test-pull-requests-master {} {}'.format(redis_server, repo))
-            time.sleep(1 * 60)
+            time.sleep(30 * 60)
+
+def start_comment_worker(redis_server):
+    """Arguments: redis_server (e.g. 192.168.0.2)
+    """
+    _setup()
+    if not fabric.contrib.files.exists('test-pull-requests'):
+        run('git clone https://github.com/karenc/test-pull-requests.git')
+    with cd('test-pull-requests'):
+        _update_repo()
+        if not fabric.contrib.files.exists('bin'):
+            run('virtualenv .')
+        run('./bin/python setup.py install')
+        run('./bin/test-pull-requests-comment-worker {}'.format(redis_server))
 
 def test():
     run('uname -a')

@@ -11,8 +11,10 @@ setup(
             'redis',
             ),
         include_package_data=True,
-        entry_points='''
-        [console_scripts]
-        test-pull-requests-master = test_pull_requests.scripts:master
-        ''',
+        entry_points={
+            'console_scripts': [
+                'test-pull-requests-master = test_pull_requests.scripts:master',
+                'test-pull-requests-comment-worker = test_pull_requests.scripts:comment_worker',
+                ],
+            },
         )
