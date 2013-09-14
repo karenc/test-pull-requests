@@ -36,3 +36,18 @@ Installation
 5. Have a look at what tasks are available:
 
    ``./bin/fab -l``
+
+Example usage with karenc/cnx-archive
+-------------------------------------
+
+1. Start the master (which gets the list of open pull requests from repo)
+
+   ``./bin/fab -H localhost start_master:redis_server=localhost,repo=karenc/cnx-archive``
+
+2. Start the build worker (which set up the environment and runs the tests)
+
+   ``./bin/python run_tests.py archive localhost -n raring-clean-clone -i 192.168.122.101`` (inside karenc/connexions-setup)
+
+3. Start the comment worker (which posts comments to the pull requests)
+
+   ``./bin/fab -H localhost start_comment_worker:redis_server=localhost``
