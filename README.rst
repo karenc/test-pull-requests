@@ -7,7 +7,7 @@ Installation
 
 1. Install virtualenv
 
-   ``sudo apt-get install virtualenv``
+   ``sudo apt-get install python-virtualenv``
 
    OR
 
@@ -19,7 +19,7 @@ Installation
 
 3. Install fabric
 
-   ``./bin/pip install fabric fexpect``
+   ``./bin/pip install fabric``
 
 4. Check whether paramiko is broken:
 
