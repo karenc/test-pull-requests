@@ -31,7 +31,7 @@ def start_master(redis_server, repo):
         run('./bin/python setup.py install')
         while True:
             run('./bin/test-pull-requests-master {} {}'.format(redis_server, repo))
-            time.sleep(30 * 60)
+            time.sleep(15 * 60)
 
 def start_comment_worker(redis_server):
     """Arguments: redis_server (e.g. 192.168.0.2)
