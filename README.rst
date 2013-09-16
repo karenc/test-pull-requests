@@ -2,6 +2,20 @@
 README for test-pull-requests
 =============================
 
+test-pull-request is a python program written to help test pull requests on
+github.  The way it works is:
+
+1. The program polls github repositories every 15 minutes for open pull
+   requests.  If the pull request is new, or the HEAD sha of the pull request
+   is different, a job is pushed into the "build_queue".
+
+2. A user written program needs to have a blocking pop operation on the
+   "build_queue".  When a job comes in, run the tests and push the result into
+   the "comment_queue".
+
+3. Whenever a comment is in the "comment_queue", the program posts the comment
+   to the github pull request.
+
 Installation
 ------------
 
